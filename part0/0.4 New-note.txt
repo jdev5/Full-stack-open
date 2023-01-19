@@ -1,0 +1,24 @@
+title Form - post
+
+browser->server:HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note
+server-->browser: New note added in form (content-type: text/html; charset=utf-8)
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
+server-->browser: HTML-code
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+server-->browser: main.css
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.js
+server-->browser: main.js
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+server-->browser: [{content: "657", date: "2023-01-17T18:26:52.524Z"},…]
+browser->server: HTTP GET https://studies.cs.helsinki.fi/favicon.ico
+server-->browser: FAVICON
+
+
+Link to full diagram:
+https://www.websequencediagrams.com/?lz=dGl0bGUgRm9ybSAtIHBvc3QKCmJyb3dzZXItPnNlc
+nZlcjpIVFRQIFBPU1QgaHR0cHM6Ly9zdHVkaWVzLmNzLmhlbHNpbmtpLmZpL2V4YW1wbGVhcHAvbmV3X25
+vdGUKAD4GLS0-AE8HOiBOZXcgbm90ZSBhZGRlZCBpbiBmb3JtIChjb250ZW50LXR5cGU6IHRleHQvaHRtb
+DsgY2hhcnNldD11dGYtOCkAgQ4RIACBGwVHRQByLW90ZXMAgQkTSFRNTC1jb2RlACFFbWFpbi5jcwBVFAAS
+CQAfSWoAThlqcwCDQhIAggE0ZGF0YS5qc29uAINCE1t7AIM4BzogIjY1NyIsIGRhdGU6ICIyMDIzLTAxLTE
+3VDE4OjI2OjUyLjUyNFoifSzigKZdAIMUOmZhdmljb24uaWNvAIRSE0ZBVklDT04&s=default

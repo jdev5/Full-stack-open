@@ -1,0 +1,26 @@
+title New note (SPA)
+
+IMPORTANT: Although the diagram is complete, 
+only the form request was added and without reloading the page
+
+browser->server:HTTP GET https://studies.cs.helsinki.fi/exampleapp/spa
+server-->browser:  HTML-code
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+server-->browser: main.css
+browser->server: https://studies.cs.helsinki.fi/exampleapp/spa.js
+server-->browser: spa.js
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+server-->browser: [{content: "657", date: "2023-01-17T18:26:52.524Z"},…]
+browser->server: HTTP GET https://studies.cs.helsinki.fi/favicon.ico
+server-->browser: FAVICON
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+server-->browser:  this step is added without reloading the page
+
+Link to full diagram:
+https://www.websequencediagrams.com/?lz=dGl0bGUgTmV3IG5vdGUgKFNQQSkKCmJyb3dzZXItPnN
+lcnZlcjpIVFRQIEdFVCBodHRwczovL3N0dWRpZXMuY3MuaGVsc2lua2kuZmkvZXhhbXBsZWFwcC9zcGEKADg
+GLS0-AEkHOiAgSFRNTC1jb2RlAFMSIAAzM21haW4uY3NzAFgTABIJAFcRAIEYLS5qAEkUABIHAIB_RWRhdGE
+uanNvbgCCHRNbe2NvbnRlbnQ6ICI2NTciLCBkYXRlOiAiMjAyMy0wMS0xN1QxODoyNjo1Mi41MjRaIn0s4oCm
+XQCCIzpmYXZpY29uLmljbwCDLRNGQVZJQ09OAIMlF1BPUwCDdyxuZXdfbm90ZV8AhBUXdGhpcyBzdGVwIGlzIGFkZGVkIHdpdGhvdXQgcmVsb2FkaW5nIHRoZSBwYWdlCgoKCg&s=default
