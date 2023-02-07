@@ -16,13 +16,15 @@ const History = (props) => {
 
   return (
     <div>
-      <p>Good: {props.good}</p>
-      <p>Neutral: {props.neutral}</p>
-      <p>Bad: {props.bad}</p>
-      <p>All: {props.allClicks.reduce((a, b) => a + b, 0)}</p>
-      <p>Average: {props.average}</p>
-      <p>Positive: {props.positive}%</p>
-    </div>
+      <table>
+        <tr>Good: {props.good}</tr>
+        <tr>Neutral: {props.neutral}</tr>
+        <tr>Bad: {props.bad}</tr>
+        <tr>All: {props.allClicks.reduce((a, b) => a + b, 0)}</tr>
+        <tr>Average: {props.average}</tr>
+        <tr>Positive: {props.positive}%</tr>
+      </table>
+      </div>
   );
 };
 
