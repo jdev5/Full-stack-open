@@ -59,7 +59,7 @@ const App = () => {
         neutral={neutral}
         bad={bad}
         allClicks={allClicks}
-        average={good - bad / 3}
+        average={(good - bad) / allClicks.length}
         positive={(good / allClicks.length) * 100}
       />
     </div>
