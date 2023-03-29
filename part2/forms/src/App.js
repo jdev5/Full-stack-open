@@ -2,14 +2,15 @@ import React, { useState } from "react";
 
 const App = () => {
   const [persons, setPersons] = useState([
-  { name: "Arto Hellas", phone: "040-215-977" ,id: 1 },
-  { name: 'Ada Lovelace', phone: '39-44-5323523', id: 2 },
-  { name: 'Dan Abramov', phone: '12-43-234345', id:3 },
-  { name: 'Mary Poppendieck', phone: '39-23-6423122', id:4 }]);
+    { name: "Arto Hellas", phone: "040-215-977", id: 1 },
+    { name: "Ada Lovelace", phone: "39-44-5323523", id: 2 },
+    { name: "Dan Abramov", phone: "12-43-234345", id: 3 },
+    { name: "Mary Poppendieck", phone: "39-23-6423122", id: 4 },
+  ]);
   const [newName, setNewName] = useState("");
   const [addPhone, setAddPhone] = useState("");
   const [contacts, setContacts] = useState("");
-  
+
   const submit = (event) => {
     event.preventDefault();
     const nameObject = {
@@ -17,7 +18,7 @@ const App = () => {
       phone: addPhone,
       id: persons.length + 1,
     };
-   
+
     const nameExists = persons.some((person) => person.name === newName);
     if (nameExists) {
       alert(`${newName} already exists in the phonebook!`);
@@ -26,10 +27,10 @@ const App = () => {
       setNewName("");
     }
   };
-    const handleNewName = (event) => {
+  const handleNewName = (event) => {
     setNewName(event.target.value);
   };
-    const handleContacts = (event) => {
+  const handleContacts = (event) => {
     setContacts(event.target.value);
   };
 
@@ -46,39 +47,55 @@ const App = () => {
     );
   };
 
-  
-    
-  return (
-    <div>
-      <h2>Phonebook</h2>
+  const Filter = () => {
+    return (
       <div>
-          Filter shown with: <input value={contacts} onChange={handleContacts}  /> 
-          {searchContacts().map((person) => (
+        {searchContacts().map((person) => (
           <p key={person.id}>
             {person.name} : {person.phone}
           </p>
         ))}
-      {console.log(contacts)}
-    
-        </div>
+      </div>
+    );
+  };
+
+  const ShowContacts = () => {
+    return (
+      <div>
+        {persons.map((value) => (
+          <p key={value.id}>
+            {value.name}: {value.phone}
+          </p>
+        ))}
+      </div>
+    );
+  };
+
+ 
+
+  return (
+    <div>
+      <h2>Phonebook</h2>
+      <div>
+        Filter shown with: <input value={contacts} onChange={handleContacts} />
+        <Filter />
+      </div>
 
       <h2>Add a new</h2>
       <form onSubmit={submit}>
         <div>
-          Name: <input value={newName} onChange={handleNewName} /> <br/><br/><br/>
+          Name: <input value={newName} onChange={handleNewName} /> <br />
+          <br />
+          <br />
           Number: <input value={addPhone} onChange={handleAddPhone} />
         </div>
-        <br/>
+        <br />
         <div>
           <button type="submit">add</button>
         </div>
       </form>
       <h2>Numbers</h2>
-      <div>
-        {persons.map((value) => (
-          <p key={value.id}>{value.name}: {value.phone}</p>
-        ))}
-      </div>
+      <ShowContacts />
     </div>
   );
 };
