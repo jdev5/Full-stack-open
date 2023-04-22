@@ -1,0 +1,31 @@
+.delete-notificacion {
+   
+    align-items: center;
+    width: auto;
+    height: 20px;
+    padding: 0 16px;
+    margin-left: 20px;
+    background: #fe4567;
+    border-radius: 4px;
+    color: white;
+    animation: shake_541 0.14s 3;
+  }
+  
+  .notificacion {
+   
+    align-items: center;
+    text-align: center;
+    width: auto;
+    height: 20px;
+    padding: 0 16px;
+    margin-left: 20px;
+    background: green;
+    border-radius: 4px;
+    color: white;
+    animation: shake_541 0.14s 3;
+  }
+
+  .addContact {
+    display: flex;
+    align-items: center;
+  }

@@ -3,22 +3,17 @@
     {
       "name": "dan abramov",
       "phone": "132 456 789",
-      "id": 3
+      "id": 1
     },
     {
       "name": "Mary Poppendieck",
       "phone": "39-23-6423122",
-      "id": 4
+      "id": 2
     },
     {
       "name": "Jonathan Fernandez",
-      "phone": "096965903",
-      "id": 5
-    },
-    {
-      "name": "Lurmarvy Baute",
-      "phone": "123465789",
-      "id": 6
+      "phone": "12346789",
+      "id": 3
     }
   ]
 }

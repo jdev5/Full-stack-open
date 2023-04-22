@@ -1,20 +1,27 @@
 import { useState, useEffect } from "react";
 import personService from "./services/persons";
+import Notification from "./components/Notificacion";
+import DeleteNotification from "./components/DeleteNotification";
+import "./index.css"
+
 
 const App = () => {
-  const [persons, setPersons] = useState([]);
-  const [newName, setNewName] = useState("");
-  const [addPhone, setAddPhone] = useState("");
-  const [contacts, setContacts] = useState("");
-
-  // Get initial contacts when the application loads
+  const [persons, setPersons] = useState([]); // Estado para almacenar la lista de contactos
+  const [newName, setNewName] = useState(""); // Estado para almacenar el nuevo nombre de contacto
+  const [addPhone, setAddPhone] = useState(""); // Estado para almacenar el nuevo número de teléfono de contacto
+  const [contacts, setContacts] = useState(""); // Estado para almacenar el valor de búsqueda de contactos
+  const [addcontactMessage, setAddContactMessage] = useState(null)
+  const [updateContactMessage, setUpdateContactMessage] = useState(null)
+  const [deleteContactMessage, setDeleteContactMessage] = useState(null)
+  const [removeContactMessage, setRemoveContactMessage] = useState(null)
+  // Obtener los contactos iniciales cuando se carga la aplicación
   useEffect(() => {
     personService.getAll().then((initialContacts) => {
       setPersons(initialContacts);
     });
   }, []);
 
-  // Function to handle form submission
+  // Función para manejar el envío del formulario
   const submit = (event) => {
     event.preventDefault();
     const newObject = {
@@ -22,26 +29,26 @@ const App = () => {
       phone: addPhone,
     };
 
-    // Check if the new name is valid before calling toLowerCase()
+    // Comprobar si el nuevo nombre es válido antes de llamar a toLowerCase()
     if (newName && newName.trim().length > 0) {
-      // Check if the new contact already exists in the current contact list
+      // Comprobar si el nuevo contacto ya existe en la lista de contactos actual
       const contactIndex = persons.findIndex(
         (person) => person.name.toLowerCase() === newName.toLowerCase()
       );
 
       if (contactIndex >= 0) {
-        // If the contact already exists, show a confirmation to the user
+        // Si el contacto ya existe, mostrar una confirmación al usuario
         const shouldUpdate = window.confirm(
-          `${newName} already exists in the contact list. Do you want to update the phone number?`
+          `${newName} ya existe en la lista de contactos. ¿Deseas actualizar el número de teléfono?`
         );
 
         if (shouldUpdate) {
-          // If the user confirms the update, call the update function of the service
+          // Si el usuario confirma la actualización, llamar a la función de actualización del servicio
           const contactToUpdate = persons[contactIndex];
           personService
             .updateContact(contactToUpdate.id, newObject)
             .then((updatedContact) => {
-              // Update the state of persons with the updated contact
+              // Actualizar el estado de persons con el contacto actualizado
               setPersons(
                 persons.map((person) =>
                   person.id === updatedContact.id ? updatedContact : person
@@ -49,44 +56,59 @@ const App = () => {
               );
               setNewName("");
               setAddPhone("");
+              setUpdateContactMessage(`Sure! The contact '${updatedContact.name}' has been update successfully.`)
+              setTimeout(() => {
+                setUpdateContactMessage(null)
+              }, 3000)
+              
             })
             .catch((error) => {
-              // Handle errors in contact update
-              console.error("Failed to update contact:", error);
+              // Manejar errores en la actualización del contacto
+              setRemoveContactMessage(
+                `The contact '${persons.name}' was already removed from server`
+              )
+              setTimeout(() => {
+                setRemoveContactMessage(null)
+              }, 5000)
             });
         }
       } else {
-        // If the contact doesn't exist, add a new contact
+        // Si el contacto no existe, agregar un nuevo contacto
         personService.addContact(newObject).then((addedContact) => {
-          // Update the state of persons with the newly added contact
+          // Actualizar el estado de persons con el nuevo contacto agregado
           setPersons(persons.concat(addedContact));
           setNewName("");
           setAddPhone("");
+          setAddContactMessage(`The contact '${addedContact.name}' has been added successfully.`)
+          setTimeout(() => {
+            setAddContactMessage(null)
+          }, 3000)
         });
       }
     } else {
-      alert("Please enter a valid name!");
+      alert("Por favor, introduce un nombre válido");
     }
   };
 
-  // Function to handle changes in the contacts search input
+  // Función para manejar los cambios en la entrada de búsqueda de contactos
   const handleContacts = (event) => {
     setContacts(event.target.value);
   };
 
-  // Function to handle changes in the new name input
+  // Función para manejar los cambios en la entrada de nuevo nombre
   const handleNewName = (event) => {
     setNewName(event.target.value);
   };
 
-  // Function to handle changes in the new phone number input
+  // Función para manejar los cambios en la entrada de nuevo número de teléfono
   const handleAddPhone = (event) => {
     setAddPhone(event.target.value);
   };
 
-  // Function to filter contacts based on the search value
+  // Función para filtrar los contactos según el valor de búsqueda
   const searchContacts = () => {
     if (contacts.length === 0) {
+
       return [];
     }
     return persons.filter(
@@ -121,6 +143,10 @@ const App = () => {
         personService.deleteContact(id).then(() => {
           // Update the state of persons by filtering out the deleted contact
           setPersons(persons.filter((person) => person.id !== id));
+          setDeleteContactMessage(`the contact has been delete successfully.`)
+          setTimeout(() => {
+            setDeleteContactMessage(null)
+          }, 3000)
         });
       }
     };
@@ -139,7 +165,7 @@ const App = () => {
     );
   };
 
-  // ...código posterior...
+  
 
   return (
     <div>
@@ -149,13 +175,19 @@ const App = () => {
         <Filter />
       </div>
 
+      <div className="addContact">
       <h2>Add a new</h2>
+          <Notification message={addcontactMessage}/>
+          <Notification message={updateContactMessage}/>
+          <DeleteNotification message={deleteContactMessage}/>
+          <DeleteNotification message={removeContactMessage}/>
+          </div>
       <form onSubmit={submit}>
         <div>
           Name: <input value={newName} onChange={handleNewName} /> <br />
           <br />
           <br />
-          Number: <input value={addPhone} onChange={handleAddPhone} />
+          Number: <input value={addPhone} onChange={handleAddPhone} />          
         </div>
         <br />
         <div>
