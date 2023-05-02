@@ -113,7 +113,7 @@ const App = () => {
     }
     return persons.filter(
       (value) =>
-        value.name && value.name.toLowerCase().includes(contacts.toLowerCase())
+        value.name && value.name  .toLowerCase().includes(contacts.toLowerCase())
     );
   };
 
